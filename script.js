@@ -1,7 +1,8 @@
 /* =========================================================
    SECUREVOTE - BLOCKCHAIN CONFIGURATION
 ========================================================= */
-
+const API_BASE_URL =
+    "https://securevote-6t15.onrender.com";
 const contractAddress =
     "0x43ea41dceb4699561b4e2f0d2c200abf26296e21";
 
@@ -238,9 +239,8 @@ async function verifyIdentity() {
 
     try {
 
-        const response = await fetch(
-            `/api/voters/${voterId}`
-        );
+        const response = await fetch(`${API_BASE_URL}/api/voters/${voterId}`);
+
 
         if (response.status === 404) {
 
@@ -533,7 +533,7 @@ async function confirmVote() {
 
         const authorizationResponse =
             await fetch(
-                `/api/voters/${currentTestId}/authorize`,
+               `${API_BASE_URL}/api/voters/${currentTestId}/authorize`,
                 {
                     method: "POST",
 
@@ -687,7 +687,7 @@ async function confirmVote() {
 
         const response =
             await fetch(
-                `/api/voters/${currentTestId}/vote`,
+               `${API_BASE_URL}/api/voters/${currentTestId}/vote`,
                 {
                     method: "POST",
 
@@ -1099,7 +1099,7 @@ document.addEventListener(
 ========================================================= */
 
 fetch(
-    "/api/test"
+    `${API_BASE_URL}/api/test`
 )
     .then(
         response => response.json()
