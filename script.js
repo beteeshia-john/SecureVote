@@ -1,8 +1,7 @@
 /* =========================================================
    SECUREVOTE - BLOCKCHAIN CONFIGURATION
 ========================================================= */
-const API_BASE_URL =
-    "https://securevote-6t15.onrender.com";
+const API_BASE_URL = "https://securevote-6tl5.onrender.com";
 const contractAddress =
     "0x43ea41dceb4699561b4e2f0d2c200abf26296e21";
 
