@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>SecureVote | Electronic Voting System</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- ================= HEADER ================= -->
+
+    <header class="top-header">
+      <div class="brand">
+        <div class="brand-icon">✓</div>
+
+        <div>
+          <h1>SecureVote</h1>
+          <p>Electronic Voting System</p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button type="button" class="secondary-button" onclick="openResults()">
+          View Results
+        </button>
+
+        <div class="system-status">
+          <span class="status-dot"></span>
+          System Online
+        </div>
+      </div>
+    </header>
+
+    <!-- ================= MAIN ================= -->
+
+    <main>
+      <!-- ================= HOME / LOGIN ================= -->
+
+      <section id="home-section" class="page-section">
+        <div class="welcome-area">
+          <div class="welcome-badge">SECURE ELECTRONIC VOTING</div>
+
+          <h2>Cast Your Vote Securely</h2>
+
+          <p class="welcome-text">
+            Verify your voter identity and participate in the electronic voting
+            process.
+          </p>
+        </div>
+
+        <div class="verification-card">
+          <div class="card-heading">
+            <div class="heading-icon">ID</div>
+
+            <div>
+              <h3>Voter Authentication</h3>
+              <p>Enter your registered Voter ID to continue.</p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="identityInput"> Voter ID </label>
+
+            <div class="input-wrapper">
+              <input
+                type="password"
+                id="identityInput"
+                placeholder="Enter your Voter ID"
+                autocomplete="off"
+              />
+
+              <button
+                type="button"
+                class="show-button"
+                id="toggleIdButton"
+                onclick="toggleVoterId()"
+              >
+                Show
+              </button>
+            </div>
+
+            <small> Your Voter ID is protected while being entered. </small>
+          </div>
+
+          <button class="primary-button" onclick="verifyIdentity()">
+            Verify Voter ID
+            <span>→</span>
+          </button>
+
+          <div id="identityMessage" class="message"></div>
+        </div>
+      </section>
+
+      <!-- ================= ELIGIBILITY ================= -->
+
+      <section id="eligibility-section" class="page-section hidden">
+        <div class="status-card success-card">
+          <div class="large-status-icon">✓</div>
+
+          <h2>Identity Verified</h2>
+
+          <p>Your voter identity has been successfully verified.</p>
+        </div>
+        <div class="eligibility-card">
+          <div class="voter-photo">
+            <img id="voterPhoto" src="" alt="Voter Photo" />
+          </div>
+          <div class="info-row">
+            <span>Name</span>
+            <strong id="voterName">—</strong>
+          </div>
+
+          <div class="info-row">
+            <span>Voter ID</span>
+            <strong id="verifiedVoterId">—</strong>
+          </div>
+
+          <div class="info-row">
+            <span>Constituency</span>
+            <strong id="constituency">—</strong>
+          </div>
+
+          <div class="info-row">
+            <span>Local Body</span>
+            <strong id="localBody">—</strong>
+          </div>
+
+          <div class="info-row">
+            <span>Ward</span>
+            <strong id="ward">—</strong>
+          </div>
+
+          <div class="info-row">
+            <span>District</span>
+            <strong id="district">—</strong>
+          </div>
+
+          <div class="info-row">
+            <span>State</span>
+            <strong id="state">—</strong>
+          </div>
+
+          <div class="info-row">
+            <span>Eligibility</span>
+            <strong class="eligible-text">Eligible to Vote</strong>
+          </div>
+
+          <div class="info-row">
+            <span>Voting Status</span>
+            <strong>Not Yet Voted</strong>
+          </div>
+        </div>
+
+        <button
+          class="primary-button centered-button"
+          onclick="proceedToVoting()"
+        >
+          Continue to Ballot
+          <span>→</span>
+        </button>
+      </section>
+
+      <!-- ================= VOTING ================= -->
+
+      <section id="voting-section" class="page-section hidden">
+        <div class="section-heading">
+          <div>
+            <div class="section-label">STEP 3 OF 4</div>
+
+            <h2>Cast Your Vote</h2>
+
+            <p>Select one candidate and confirm your choice.</p>
+          </div>
+
+          <div class="ballot-status">BALLOT</div>
+        </div>
+
+        <div class="security-notice">
+          <span>🔒</span>
+
+          <div>
+            <strong>Secure Ballot</strong>
+            <p>Your selection will be submitted as a voting transaction.</p>
+          </div>
+        </div>
+
+        <div class="candidate-list">
+          <!-- Candidate A -->
+
+          <div class="candidate" onclick="selectCandidate(this, 'Candidate A')">
+            <div class="candidate-radio">
+              <div></div>
+            </div>
+
+            <div class="candidate-info">
+              <h3>Candidate A</h3>
+
+              <p>Candidate for Position 1</p>
+            </div>
+          </div>
+
+          <!-- Candidate B -->
+
+          <div class="candidate" onclick="selectCandidate(this, 'Candidate B')">
+            <div class="candidate-radio">
+              <div></div>
+            </div>
+
+            <div class="candidate-info">
+              <h3>Candidate B</h3>
+
+              <p>Candidate for Position 1</p>
+            </div>
+          </div>
+
+          <!-- Candidate C -->
+
+          <div class="candidate" onclick="selectCandidate(this, 'Candidate C')">
+            <div class="candidate-radio">
+              <div></div>
+            </div>
+
+            <div class="candidate-info">
+              <h3>Candidate C</h3>
+
+              <p>Candidate for Position 1</p>
+            </div>
+          </div>
+        </div>
+
+        <button
+          id="confirmVoteButton"
+          class="primary-button"
+          onclick="confirmVote()"
+          disabled
+        >
+          Confirm Vote
+          <span>→</span>
+        </button>
+      </section>
+
+      <!-- ================= CONFIRMATION ================= -->
+
+      <section id="confirmation-section" class="page-section hidden">
+        <div class="confirmation-card">
+          <div class="confirmation-icon">✓</div>
+
+          <div class="section-label">VOTE SUBMITTED</div>
+
+          <h2>Your Vote Has Been Recorded</h2>
+
+          <p>Your vote has been successfully submitted.</p>
+
+          <div class="transaction-box">
+            <div class="transaction-row">
+              <span>Status</span>
+              <strong class="confirmed"> Confirmed </strong>
+            </div>
+
+            <div class="transaction-row">
+              <span>Voter ID</span>
+              <strong id="confirmationVoterId"> — </strong>
+            </div>
+
+            <div class="transaction-row">
+              <span>Selected Candidate</span>
+              <strong id="confirmationCandidate"> — </strong>
+            </div>
+          </div>
+
+          <div class="blockchain-note">
+            <span>⛓</span>
+
+            <p>
+              In the blockchain-enabled version, this action will be submitted
+              to the voting smart contract.
+            </p>
+          </div>
+
+          <div class="confirmation-buttons">
+            <button class="secondary-button" onclick="returnHome()">
+              Return Home
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= RESULTS ================= -->
+
+      <section id="results-section" class="page-section hidden">
+        <div class="section-heading">
+          <div>
+            <div class="section-label">ELECTION RESULTS</div>
+
+            <h2>Current Results</h2>
+
+            <p>Vote distribution across all candidates.</p>
+          </div>
+
+          <div class="results-status">LIVE</div>
+        </div>
+
+        <div class="results-card">
+          <div class="result-row">
+            <div class="result-title">
+              <strong>Candidate A</strong>
+              <span id="votesA">0 votes</span>
+            </div>
+
+            <div class="progress-bar">
+              <div id="barA" class="progress-fill"></div>
+            </div>
+
+            <strong id="result1">0%</strong>
+          </div>
+
+          <div class="result-row">
+            <div class="result-title">
+              <strong>Candidate B</strong>
+              <span id="votesB">0 votes</span>
+            </div>
+
+            <div class="progress-bar">
+              <div id="barB" class="progress-fill"></div>
+            </div>
+
+            <strong id="result2">0%</strong>
+          </div>
+
+          <div class="result-row">
+            <div class="result-title">
+              <strong>Candidate C</strong>
+              <span id="votesC">0 votes</span>
+            </div>
+
+            <div class="progress-bar">
+              <div id="barC" class="progress-fill"></div>
+            </div>
+
+            <strong id="result3">0%</strong>
+          </div>
+        </div>
+
+        <div class="results-note">
+          <strong>Prototype Notice</strong>
+
+          <p>
+            These results currently use local demo data. The final version will
+            retrieve vote counts from the blockchain smart contract.
+          </p>
+        </div>
+
+        <button class="secondary-button centered-button" onclick="returnHome()">
+          Return to Home
+        </button>
+      </section>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+      <p>SecureVote — Electronic Voting System</p>
+
+      <span> Prototype for academic purposes </span>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
